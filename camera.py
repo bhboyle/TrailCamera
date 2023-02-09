@@ -11,7 +11,7 @@ from gpiozero import Button
 # open the config file
 #config = configparser.ConfigParser()
 config = configparser.ConfigParser(comment_prefixes='/', allow_no_value=True)
-config.read('camera.ini')
+config.read('/home/bboyle/camera.ini')
 
 # set the input pin for the PIR sensor and set it for active high
 button = Button(15, pull_up=False) 
@@ -40,7 +40,9 @@ while True:
 		if time.time() - oldpoch >= float(minimumImageGap):
 			
 			# take the actual picture
-			os.system('libcamera-jpeg --sharpness 5 -t 50 -o /home/bboyle/last.jpg')
+			os.system('libcamera-jpeg --sharpness 5 -t 50 -o /home/bboyle/pictures/output.jpg')
+
+			os.system('composite \( /home/bboyle/pictures/Elmer_Fudd.png -resize 50% \) /home/bboyle/pictures/output.jpg /home/bboyle/pictures/last.jpg')
 
 			# let the picture get saved
 			time.sleep(.5)
@@ -72,7 +74,7 @@ while True:
 			leftCaption = captionText + " #" + currentCount
 
 			# add the captions at the bottom of the picture and move the file into the gallery
-			os.system('convert /home/bboyle/last.jpg  -pointsize 90 -fill black  -gravity Southwest -background white -splice 0x125 -annotate +30+03 "' + leftCaption + '" -gravity SouthEast  -annotate +30+03 "' + dateString + '" -append '+ directory + '/' + fileNamePrefix + currentCount + '.jpg ')
+			os.system('convert /home/bboyle/pictures/last.jpg  -pointsize 90 -fill black  -gravity Southwest -background white -splice 0x125 -annotate +30+03 "' + leftCaption + '" -gravity SouthEast  -annotate +30+03 "' + dateString + '" -append '+ directory + '/' + fileNamePrefix + currentCount + '.jpg ')
 
 			# Set the image currentCount variable to the setting in the config file
 			config.set('main', 'imageCount', currentCount)
