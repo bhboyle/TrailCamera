@@ -23,6 +23,7 @@ minimumImageGap = config.get('main', 'minimumImageGap')
 fileNamePrefix = config.get('main', 'fileNamePrefix')
 foldrify = config.get('main', 'foldrify')
 captionText = config.get('main', 'captionText')
+FudSize = config.get('main', 'FudSize')
 
 # get the current time at startup so the interval checking will work.
 oldpoch = time.time()
@@ -42,7 +43,7 @@ while True:
 			# take the actual picture
 			os.system('libcamera-jpeg --sharpness 5 -t 50 -o /home/bboyle/pictures/output.jpg')
 
-			os.system('composite \( /home/bboyle/pictures/Elmer_Fudd.png -resize 50% \) /home/bboyle/pictures/output.jpg /home/bboyle/pictures/last.jpg')
+			os.system('composite -gravity SouthWest \( /home/bboyle/pictures/Elmer_Fudd.png -resize ' + FudSize + '% \) /home/bboyle/pictures/output.jpg /home/bboyle/pictures/last.jpg')
 
 			# let the picture get saved
 			time.sleep(.5)
