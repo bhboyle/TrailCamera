@@ -11,7 +11,7 @@ from gpiozero import Button
 # open the config file
 #config = configparser.ConfigParser()
 config = configparser.ConfigParser(comment_prefixes='/', allow_no_value=True)
-config.read('/home/bboyle/camera.ini')
+config.read('camera.ini')
 
 # set the input pin for the PIR sensor and set it for active high
 button = Button(15, pull_up=False) 
