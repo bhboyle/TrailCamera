@@ -1,6 +1,6 @@
 This project is going to be a DIY trail camera for my hunting blind. It will be made with a Raspberry pi Zero 2 W and the camera module is still being determined.
 
-A PIR sensor is used to trigger the image capture and Imagemagick is used to add detail text to the image after it is taken.
+A PIR sensor is used to trigger the image capture via GPIO 15 and Imagemagick is used to add detail text to the image after it is taken.
 
 Given that this device will be in the forest the WIFI will be setup in AP mode and will be standalone. I plan to use my phone to connect to the Pi and retrieve the images via SMB shares and a web page.
 
